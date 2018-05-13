@@ -49,7 +49,7 @@ public final class Producer {
         // The listener on the file component gets notified when new files are
         // found ... that's it!
         for (int i = 0; i < 10; i++) {
-            template.sendBody("activemq:queue:instantpayments.ing.beneficiary.payment.request?username=gpays&password=gpays", "Test Message: " + i);
+            template.sendBody("activemq:queue:testclient.payment.request?username=gpays&password=gpays", "Test Message: " + i);
             LOG.info("Sending message: " + i); 
         }
 

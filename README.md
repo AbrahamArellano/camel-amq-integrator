@@ -15,7 +15,7 @@ The example should run if you type
 
 	mvn camel:run
 
-This will create 10 concurrent consumers of the queue "instantpayments.ing.beneficiary.payment.request"
+This will create 10 concurrent consumers of the queue "testclient.payment.request"
 
 ### Producer Run
 
@@ -23,6 +23,6 @@ To run this example:
 
 	Right click on the java class -> Run As -> Java Application
 
-This will send 10 messages to the queue "instantpayments.ing.beneficiary.payment.request"
+This will send 10 messages to the queue "testclient.payment.request"
   
 

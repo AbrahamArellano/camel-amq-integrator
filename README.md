@@ -1,10 +1,7 @@
 # JMS & File Example
 
 ### Introduction
-This example shows how to work with files and JMS.
-
-The example consumes messages from a queue and writes them to the file
-system.
+This example creates a simple producer and consumer using camel framework.
 
 ### Build
 
@@ -12,22 +9,20 @@ You will need to compile this example first:
 
 	mvn compile
 
-### Run  
+### Consumer Run  
 
 The example should run if you type
 
-	mvn exec:java -PExample
+	mvn camel:run
 
-After the example is complete, then there should be 10 files written
-in the test directory.
+This will create 10 concurrent consumers of the queue "instantpayments.ing.beneficiary.payment.request"
 
-### Forum, Help, etc
+### Producer Run
 
-If you hit an problems please let us know on the Camel Forums
-	<http://camel.apache.org/discussion-forums.html>
+To run this example:
 
-Please help us make Apache Camel better - we appreciate any feedback you may
-have.  Enjoy!
+	Right click on the java class -> Run As -> Java Application
 
+This will send 10 messages to the queue "instantpayments.ing.beneficiary.payment.request"
+  
 
-The Camel riders!

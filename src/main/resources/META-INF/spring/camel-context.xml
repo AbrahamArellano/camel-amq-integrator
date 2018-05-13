@@ -10,35 +10,26 @@
 	OF ANY KIND, either express or implied. See the License for the specific 
 	language governing permissions and limitations under the License. -->
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="
-          http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
-          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-	<!-- create a CamelContext -->
-	<camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
-		<package>org.myitbasics.camel</package>
-	</camelContext>
-
-	<bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
-		<property name="brokerURL" value="tcp://localhost:61616" />
-		<property name="userName" value="gpays" />
-		<property name="password" value="gpays" />
-	</bean>
-
-	<bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
-		<property name="configuration" ref="jmsConfig" />
-	</bean>
-
-	<bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory"
-		init-method="start" destroy-method="stop">
-		<property name="maxConnections" value="8" />
-		<property name="connectionFactory" ref="jmsConnectionFactory" />
-	</bean>
-
-	<bean id="jmsConfig" class="org.apache.camel.component.jms.JmsConfiguration">
-		<property name="connectionFactory" ref="pooledConnectionFactory" />
-		<property name="concurrentConsumers" value="10" />
-	</bean>
-
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="           http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- create a CamelContext -->
+    <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
+        <package>org.myitbasics.camel</package>
+    </camelContext>
+    <bean class="org.apache.activemq.ActiveMQConnectionFactory" id="jmsConnectionFactory">
+        <property name="brokerURL" value="tcp://localhost:61616"/>
+        <property name="userName" value="gpays"/>
+        <property name="password" value="gpays"/>
+    </bean>
+    <bean class="org.apache.activemq.camel.component.ActiveMQComponent" id="activemq">
+        <property name="configuration" ref="jmsConfig"/>
+    </bean>
+    <bean class="org.apache.activemq.pool.PooledConnectionFactory"
+        destroy-method="stop" id="pooledConnectionFactory" init-method="start">
+        <property name="maxConnections" value="8"/>
+        <property name="connectionFactory" ref="jmsConnectionFactory"/>
+    </bean>
+    <bean class="org.apache.camel.component.jms.JmsConfiguration" id="jmsConfig">
+        <property name="connectionFactory" ref="pooledConnectionFactory"/>
+        <property name="concurrentConsumers" value="10"/>
+    </bean>
 </beans>
